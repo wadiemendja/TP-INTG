@@ -1,0 +1,15 @@
+.login-container {
+    width: 50%;
+    min-width: 350px;
+    padding: 50px;
+    border-radius: 20px;
+    border: solid lightgray 2px;
+    margin: 100px auto;
+}
+
+.admin-img svg {
+    width: 30%;
+    height: 30%;
+    margin: 0 auto;
+    display: block;
+}
