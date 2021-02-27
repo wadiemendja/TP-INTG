@@ -4,32 +4,33 @@ import { getConfig } from "./firebaseConfig.js";
 const firebaseConfig = getConfig();
 firebase.initializeApp(firebaseConfig);
 
-// login node 
-const loginRef = firebase.database().ref('/login');
-
-// getting all users
-loginRef.once('value', (snap) => {
-    let users = snap.val();
-    for (let i in users) {
-        checkUser(users[i]);
-    }
-});
-
-
 // checking user input
-function checkUser(user) {
 
-    const loginBtn = document.getElementById('login_btn');
 
-    loginBtn.addEventListener('click', () => {
-        const username = document.getElementById('username');
-        const password = document.getElementById('password');
-        if (username == user.username) {
+const loginBtn = document.getElementById('login_btn');
 
-        } else if (password == user.password) {
+loginBtn.addEventListener('click', (event) => {
 
+    event.preventDefault();
+    // getting username and password
+    const username = document.getElementById('username').value;
+    const frontPassword = document.getElementById('password').value;
+    // login node 
+    const loginRef = firebase.database().ref('/users/' + username);
+
+    // getting all users
+    loginRef.once('value', (snap) => {
+        const password = snap.val().password;
+        console.log(password);
+        if (password == frontPassword) {
+            // reading url 
+            const url = location.href;
+            location.href = "/" + getPath(url);
         }
     });
+});
 
-
+function getPath(string) {
+    const index = string.indexOf('?');
+    return string.substr(index + 1);
 }

@@ -1,8 +1,10 @@
 const items = document.querySelectorAll('.item');
-console.log(items)
-items.forEach((element)=>{
-    element.addEventListener('click', (event)=>{
+
+items.forEach((element) => {
+    element.addEventListener('click', (event) => {
+        // getting data type admin / student / teacher
         const dataType = event.target.dataset;
-        console.log(dataType);
+        console.log(dataType)
+        location.href = "/login?" + dataType.type;
     });
 });
