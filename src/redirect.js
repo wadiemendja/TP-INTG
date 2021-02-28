@@ -4,7 +4,8 @@ items.forEach((element) => {
     element.addEventListener('click', (event) => {
         // getting data type admin / student / teacher
         const dataType = event.target.dataset;
-        console.log(dataType)
-        location.href = "/login?" + dataType.type;
+        const url = new URL(location.href + "login");
+        url.searchParams.append('type', dataType.type)
+        location.href = url;
     });
 });
